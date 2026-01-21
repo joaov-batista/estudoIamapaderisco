@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiskMap Pro 2.0 • IA Integrada</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="brand">
+                <i class="ph ph-shield-check"></i>
+                <div>
+                    <h1>RiskMap Pro</h1>
+                    [cite_start]<small>IA & NR-5 [cite: 101]</small>
+                </div>
+            </div>
+            <div class="xp-container">
+                <i class="ph ph-trophy"></i> <span id="xpDisplay">0 XP</span>
+            </div>
+        </div>
+        
+        <nav id="menu">
+            <button onclick="navTo('inicio')" class="active"><i class="ph ph-house"></i> Início</button>
+            <button onclick="navTo('fundamentos')"><i class="ph ph-book-open"></i> Teoria</button>
+            <button onclick="navTo('simulacao-chat')"><i class="ph ph-robot"></i> Consultor IA</button>
+            <button onclick="navTo('lab-tour')"><i class="ph ph-flask"></i> Laboratório</button>
+            <button onclick="navTo('quiz-section')"><i class="ph ph-exam"></i> Quiz</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="active fade-in">
+            <div class="hero-card">
+                <h2>Sistema de Treinamento em Mapa de Risco</h2>
+                <p>
+                    Plataforma educacional para elaboração de Mapas de Risco baseada na NR-5.
+                    [cite_start]Identifique riscos químicos, físicos e biológicos em ambientes laborais reais[cite: 4, 101].
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="number">IA</span>
+                        <span class="label">Consultor em Tempo Real</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">20</span>
+                        <span class="label">Questões Técnicas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number">5</span>
+                        [cite_start]<span class="label">Grupos de Risco [cite: 124]</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="navTo('lab-tour')">Começar Inspeção <i class="ph ph-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="fundamentos" class="fade-in">
+            <div class="section-header">
+                <h2><i class="ph ph-books"></i> Base Teórica (NR-5)</h2>
+            </div>
+
+            <div class="card">
+                [cite_start]<h3>Classificação de Riscos e Cores [cite: 124]</h3>
+                <div class="risk-table-container" id="riskTable">
+                    </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="ph ph-steps"></i> Hierarquia de Controle</h3>
+                <p class="text-sm">Ordem de prioridade para mitigar riscos identificados:</p>
+                
+                <div class="pyramid-container">
+                    <div class="p-level p-1" onclick="showTheoryInfo('eliminar')">1. Eliminação (Remover o risco)</div>
+                    <div class="p-level p-2" onclick="showTheoryInfo('substituir')">2. Substituição (Trocar produto)</div>
+                    <div class="p-level p-3" onclick="showTheoryInfo('engenharia')">3. [cite_start]Engenharia (EPCs/Barreiras) [cite: 18]</div>
+                    <div class="p-level p-4" onclick="showTheoryInfo('adm')">4. Administrativo (Treino/Sinalização)</div>
+                    <div class="p-level p-5" onclick="showTheoryInfo('epi')">5. [cite_start]EPI (Última defesa) [cite: 29]</div>
+                </div>
+                <div id="theoryDetail" class="info-box hidden"></div>
+            </div>
+
+            <div class="card">
+                [cite_start]<h3><i class="ph ph-chart-donut"></i> Intensidade (Círculos) [cite: 224]</h3>
+                <p class="text-sm">O tamanho do círculo no mapa representa a gravidade:</p>
+                <div class="intensity-visualizer">
+                    <div class="circle-demo small">Pequeno</div>
+                    <div class="circle-demo medium">Médio</div>
+                    <div class="circle-demo large">Grande</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="simulacao-chat" class="fade-in">
+            <div class="section-header">
+                <h2><i class="ph ph-robot"></i> Consultor de Segurança (IA)</h2>
+                <p>Descreva uma situação do laboratório e a IA analisará o risco segundo a NR-5.</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-window" id="chatWindow">
+                    <div class="msg bot">
+                        <div class="avatar">🤖</div>
+                        <div class="bubble">
+                            Olá! Sou seu assistente técnico. Viu algo perigoso no laboratório? 
+                            Me descreva (ex: "fio solto no chão", "cheiro de gás") que eu classifico para você.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-controls" style="display:flex; gap:10px; align-items:center; background:var(--card); padding:12px; border-top:1px solid var(--border);">
+                    <input type="text" id="userInput" placeholder="Digite aqui o problema encontrado..." 
+                           style="flex:1; padding:12px; border-radius:8px; border:1px solid var(--border); background:#020617; color:white; outline:none;">
+                    <button onclick="falarComIA()" class="btn-primary" style="width:auto; margin:0; height:100%;">
+                        <i class="ph ph-paper-plane-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="lab-tour" class="fade-in">
+            <div class="section-header">
+                <h2><i class="ph ph-binoculars"></i> Inspeção do Laboratório</h2>
+                <p>Clique nos equipamentos para ver a análise técnica baseada no estudo de caso.</p>
+            </div>
+            <div class="lab-grid" id="labGrid">
+                </div>
+            <div id="labDetail" class="card hidden lab-detail-card"></div>
+        </section>
+
+        <section id="quiz-section" class="fade-in">
+            <div class="section-header">
+                <h2><i class="ph ph-seal-check"></i> Quiz de Certificação</h2>
+                <p>Teste seus conhecimentos sobre as normas e o laboratório.</p>
+            </div>
+
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-header">
+                    <span id="qCount">Questão 1/20</span>
+                    <span id="qScore">XP Ganho: 0</span>
+                </div>
+                <div class="question-card">
+                    <h3 id="qText">Carregando...</h3>
+                    <div class="options-list" id="qOptions"></div>
+                </div>
+                <div id="qFeedback" class="feedback hidden"></div>
+                <button id="nextBtn" class="btn-primary hidden" onclick="nextQuestion()">Próxima <i class="ph ph-caret-right"></i></button>
+            </div>
+        </section>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
